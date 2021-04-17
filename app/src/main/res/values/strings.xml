@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Calculator Example</string>
+    <string name="but1">1</string>
+    <string name="but2">2</string>
+    <string name="but3">3</string>
+    <string name="but4">4</string>
+    <string name="but5">5</string>
+    <string name="but5">5</string>
+    <string name="but6">6</string>
+    <string name="but7">7</string>
+    <string name="but8">8</string>
+    <string name="but9">9</string>
+    <string name="but0">0</string>
+    <string name="dot">.</string>
+    <string name="but_split">/</string>
+    <string name="but_multiplication">X</string>
+    <string name="but_minus">-</string>
+    <string name="but_plus">+</string>
+    <string name="but_equally">=</string>
 </resources>
