@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <ImageView
         android:layout_width="wrap_content"
@@ -19,17 +20,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="#3F51B5"
         android:textSize="40sp"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/operationField"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_weight="1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/operationField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="#3F51B5"
         android:textSize="40sp"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/resultField"
@@ -41,12 +44,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="#3F51B5"
         android:inputType="number"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resultField" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but1"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
@@ -55,7 +59,7 @@
         app:layout_constraintEnd_toStartOf="@+id/but2"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but2"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
@@ -64,7 +68,7 @@
         app:layout_constraintEnd_toStartOf="@+id/but3"
         app:layout_constraintStart_toEndOf="@id/but1" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but3"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
@@ -73,7 +77,7 @@
         app:layout_constraintEnd_toStartOf="@+id/but_split"
         app:layout_constraintStart_toEndOf="@id/but2" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but4"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
@@ -82,7 +86,7 @@
         app:layout_constraintEnd_toStartOf="@+id/but5"
         app:layout_constraintStart_toStartOf="@id/but1" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but5"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
@@ -91,7 +95,7 @@
         app:layout_constraintEnd_toStartOf="@+id/but6"
         app:layout_constraintStart_toEndOf="@id/but4" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but6"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
@@ -100,7 +104,7 @@
         app:layout_constraintEnd_toStartOf="@+id/but_multiplication"
         app:layout_constraintStart_toEndOf="@id/but5" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but7"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
@@ -109,25 +113,27 @@
         app:layout_constraintEnd_toStartOf="@+id/but8"
         app:layout_constraintStart_toStartOf="@id/but4" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but8"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
         android:text="@string/but8"
         app:layout_constraintBottom_toTopOf="@+id/but0"
         app:layout_constraintEnd_toStartOf="@id/but9"
-        app:layout_constraintStart_toEndOf="@id/but7" />
+        app:layout_constraintStart_toEndOf="@id/but7"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but9"
         style="@style/buttonStyle"
         android:onClick="onNumberClick"
         android:text="@string/but9"
         app:layout_constraintBottom_toTopOf="@+id/but_dot"
         app:layout_constraintEnd_toStartOf="@+id/but_minus"
-        app:layout_constraintStart_toEndOf="@id/but8" />
+        app:layout_constraintStart_toEndOf="@id/but8"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but0"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -136,9 +142,10 @@
         app:layout_constraintBottom_toTopOf="@id/but_equally"
         app:layout_constraintEnd_toEndOf="@id/but8"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/but7" />
+        app:layout_constraintStart_toStartOf="@id/but7"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but_dot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,9 +154,10 @@
         app:layout_constraintBottom_toTopOf="@id/but_equally"
         app:layout_constraintEnd_toStartOf="@+id/but_plus"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@id/but0" />
+        app:layout_constraintStart_toEndOf="@id/but0"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but_split"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -158,9 +166,10 @@
         app:layout_constraintBottom_toTopOf="@+id/but_multiplication"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/but3"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but_multiplication"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -169,9 +178,10 @@
         app:layout_constraintBottom_toTopOf="@+id/but_minus"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/but6"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+       />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but_minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -180,9 +190,10 @@
         app:layout_constraintBottom_toTopOf="@+id/but_plus"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/but9"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+       />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but_plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -190,9 +201,10 @@
         android:text="@string/but_plus"
         app:layout_constraintBottom_toTopOf="@+id/but_equally"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@id/but_dot" />
+        app:layout_constraintStart_toEndOf="@id/but_dot"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but_equally"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -200,9 +212,10 @@
         android:text="@string/but_equally"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/but_plus"
-        app:layout_constraintStart_toStartOf="@id/but0" />
+        app:layout_constraintStart_toStartOf="@id/but0"
+       />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/but_c"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -211,7 +224,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/but_minus"
-        app:layout_constraintTop_toTopOf="@+id/but_split" />
+        app:layout_constraintTop_toTopOf="@+id/but_split"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

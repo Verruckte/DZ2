@@ -23,9 +23,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        resultField = (TextView) findViewById(R.id.resultField);
+        resultField = (TextView)  findViewById(R.id.resultField);
         numberField = (EditText) findViewById(R.id.numberField);
         operationField = (TextView) findViewById(R.id.operationField);
+
+
     }
 
 
@@ -107,10 +109,13 @@ public class MainActivity extends AppCompatActivity {
         numberField.setText("");
     }
 
+
     public void Reset(View View) {
 
 
         numberField.getText().clear();
+        resultField.setText("");
+        operationField.setText("");
 
 
     }

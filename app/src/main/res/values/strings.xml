@@ -12,7 +12,7 @@
     <string name="but0">0</string>
     <string name="dot">.</string>
     <string name="but_split">/</string>
-    <string name="but_multiplication">X</string>
+    <string name="but_multiplication">*</string>
     <string name="but_minus">-</string>
     <string name="but_plus">+</string>
     <string name="but_equally">=</string>
