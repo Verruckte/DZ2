@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="calcButtonSize">30dp</dimen>
+    <dimen name="textSize">50sp</dimen>
+    <dimen name="settingsTextSize">10sp</dimen>
+    <dimen name="button_text_size">40sp</dimen>
 </resources>

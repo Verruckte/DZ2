@@ -14,5 +14,17 @@
         <!-- Customize your theme here. -->
         <item name="materialButtonStyle">@style/calcButtonStyle</item>
     </style>
+    <style name="calcButtonStyle" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/calcButtonSize</item>
+        <item name="android:insetRight">6dp</item>
+        <item name="android:insetLeft">6dp</item>
+    </style>
+    <style name="buttonStyle" parent="calcButtonStyle">
+        <item name="android:onClick">press</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layout_constraintVertical_chainStyle">packed</item>
+        <item name="layout_constraintHorizontal_chainStyle">packed</item>
+    </style>
 
 </resources>

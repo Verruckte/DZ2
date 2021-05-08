@@ -1,124 +1,171 @@
 package com.example.calculatorexample;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.lang.reflect.Method;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView resultField;
-    EditText numberField;
-    TextView operationField;
-    Double operand = null;
-    String lastOperation = "=";
+    private SharedPreferences sharedPreferences;
+
+    private TextView mainScreen;
+    private TextView memoryScreen;
+    private Button settings;
+
+    private Calculator calculator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        resultField = (TextView)  findViewById(R.id.resultField);
-        numberField = (EditText) findViewById(R.id.numberField);
-        operationField = (TextView) findViewById(R.id.operationField);
 
+        sharedPreferences = getSharedPreferences(Constants.MY_PREFERENCES, MODE_PRIVATE);
 
+        settings = findViewById(R.id.settings);
+        mainScreen = findViewById(R.id.numberField);
+        memoryScreen = findViewById(R.id.operationField);
+
+        calculator = new Calculator(mainScreen, memoryScreen);
+
+        settings.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivityForResult(intent, RESULT_OK);
+        });
+
+        checkNightModeActivated();
     }
 
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putString("OPERATION", lastOperation);
-        if (operand != null)
-            outState.putDouble("OPERAND", operand);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        lastOperation = savedInstanceState.getString("OPERATION");
-        operand = savedInstanceState.getDouble("OPERAND");
-        resultField.setText(operand.toString());
-        operationField.setText(lastOperation);
-    }
-
-    public void onNumberClick(View view) {
-
-        Button button = (Button) view;
-        numberField.append(button.getText());
-
-        if (lastOperation.equals("=") && operand != null) {
-            operand = null;
-        }
-    }
-
-    public void onOperationClick(View view) {
-
-        Button button = (Button) view;
-        String op = button.getText().toString();
-        String number = numberField.getText().toString();
-        if (number.length() > 0) {
-            try {
-                performOperation(Double.valueOf(number), op);
-            } catch (NumberFormatException ex) {
-                numberField.setText("");
-            }
-        }
-        lastOperation = op;
-        operationField.setText(lastOperation);
-    }
-
-    private void performOperation(Double number, String operation) {
-
-        if (operand == null) {
-            operand = number;
+    public void checkNightModeActivated() {
+        if (sharedPreferences.getBoolean(Constants.KEY_NIGHT_MODE, false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
-            if (lastOperation.equals("=")) {
-                lastOperation = operation;
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(Constants.KEY_MAIN_SCREEN, mainScreen.getText().toString());
+        outState.putString(Constants.KEY_MEMORY_SCREEN, memoryScreen.getText().toString());
+        outState.putString(Constants.KEY_EQUATION, calculator.getEquation());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mainScreen.setText(savedInstanceState.getString(Constants.KEY_MAIN_SCREEN));
+        memoryScreen.setText(savedInstanceState.getString(Constants.KEY_MEMORY_SCREEN));
+        calculator.setEquation(savedInstanceState.getString(Constants.KEY_EQUATION));
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode != RESULT_CANCELED) {
+            super.onActivityResult(requestCode, resultCode, data);
+        } else if (resultCode == RESULT_OK) {
+            saveNightModeState(data.getExtras().getBoolean(Constants.KEY_NIGHT_MODE));
+            recreate();
+        }
+    }
+
+    private void saveNightModeState(boolean nightMode) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(Constants.KEY_NIGHT_MODE, nightMode).apply();
+    }
+
+    public void press(View view) {
+        String input = mainScreen.getText().toString();
+        Button button = (Button) view;
+        switch (button.getId()) {
+            case R.id.but1:
+            case R.id.but2:
+            case R.id.but3:
+            case R.id.but4:
+            case R.id.but5:
+            case R.id.but6:
+            case R.id.but7:
+            case R.id.but8:
+            case R.id.but9:
+            case R.id.but0: {
+                String last = !calculator.getEquation().isEmpty() ? calculator.getEquation().substring(calculator.getEquation().length() - 3) : "";
+                if (last.contains("=")) {
+                    Toast.makeText(this, "Must enter an operator first", Toast.LENGTH_LONG).show();
+                    break;
+                }
+                mainScreen.setText(String.format("%s%s", input, button.getText().toString()));
+                break;
             }
-            switch (lastOperation) {
-                case "=":
-                    operand = number;
-                    break;
-                case "/":
-                    if (number == 0) {
-                        operand = 0.0;
-                    } else {
-                        operand /= number;
-                    }
-                    break;
-                case "*":
-                    operand *= number;
-                    break;
-                case "+":
-                    operand += number;
-                    break;
-                case "-":
-                    operand -= number;
-                    break;
+            case R.id.but_plus:
+            case R.id.but_minus:
+            case R.id.but_split:
+            case R.id.but_multiplication: {
+                if (!calculator.getEquation().isEmpty() || !input.isEmpty()) {
+                    calculator.addToEquation(button.getText().toString());
+                }
+                break;
+            }
+            case R.id.but_equally: {
+                if (!calculator.getEquation().isEmpty() || !input.isEmpty()) {
+                    calculator.addToEquation(button.getText().toString());
+                    mainScreen.setText(calculator.calculate());
+                }
             }
         }
-
-        resultField.setText(operand.toString().replace('.', ','));
-        numberField.setText("");
     }
 
-
-    public void Reset(View View) {
-
-
-        numberField.getText().clear();
-        resultField.setText("");
-        operationField.setText("");
-
-
+    public void clear(View view) {
+        memoryScreen.setText("");
+        mainScreen.setText("");
+        calculator.setEquation("");
     }
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

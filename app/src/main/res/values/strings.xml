@@ -17,4 +17,8 @@
     <string name="but_plus">+</string>
     <string name="but_equally">=</string>
     <string name="but_c">C</string>
+    <string name="return_btn">Return</string>
+    <string name="btn_settings">Settings</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="theme_mode">Theme Mod</string>
 </resources>
